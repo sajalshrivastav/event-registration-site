@@ -1,0 +1,20 @@
+
+#contact .card:hover i,#contact .card:hover h4{
+	color: #F28B04;
+}
+.upper_part{
+
+  margin-bottom: 3rem;
+}
+
+
+
+
+.navbar:hover{
+  color: #B61919;
+
+}
+#navbarTogglerDemo02{
+
+margin-right: 6%;
+}

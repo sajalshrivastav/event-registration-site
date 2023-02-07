@@ -1,0 +1,86 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    body{
+        padding-top: 70px;
+    }
+</style>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'zest/css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'zest/css/style.css' %}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <title>{% block title %}{% endblock title %}</title>
+</head>
+
+<body>
+  <script src="{% static 'zest/js/jquery.js' %}"></script>
+  <script src="{% static 'zest/js/popper.js' %}"></script>
+  <script src="{% static 'zest/js/bootstrap.js' %}"></script>
+  <div class="container-fluid nav_bg px-0 fixed-top">
+    <div class="container">
+      {% include 'zest/navbar.html' %}
+    </div>
+  </div>
+  {% block message %}
+
+  {% endblock message %}
+  {% block content %}
+
+  {% endblock content %}
+  <div class="sticky-footer">
+      {% include 'zest/footer.html' %}
+  </div>
+</body>
+</html>
+
+<!-- {% extends 'zest/base.html' %}
+{% load static %}
+{% block message %}
+
+{% endblock message %}
+{% block content %} -->
+<div class="container">
+  <div class="row justify-content-between mt-5">
+    <div class="col-md-4">
+      <div class="card text-center ">
+        <div class="card-header">
+          <img src="{% static 'zest/images/1_avatar-512.webp' %}" class="card-img-top" alt="reistration image">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title ">Register Individual</h5>
+          <p class="card-text ">Click on below given button to generate PID</p>
+          <a href="{% url 'generate_pid' %}" class="btn btn-color">Click Here</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          <img src="{% static 'zest/images/bootwise-icon-02.png' %}" class="card-img-top" alt="reistration image">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Register Team</h5>
+          <p class="card-text">Click on below given button to generate TID</p>
+          <a href="{% url 'generate_tid' %}" class="btn btn-color">Click Here</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          <img src="{% static 'zest/images/reistration.png' %}" class="card-img-top" alt="reistration image">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Register For Event</h5>
+          <p class="card-text">Click on below given button to register for Event</p>
+          <a href="{% url 'register_event' %}" class="btn btn-color">Click Here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

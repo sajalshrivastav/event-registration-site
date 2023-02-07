@@ -1,0 +1,310 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <title>Parivartan "Ek Chakra"</title>
+  <style>
+    body {
+      padding-top: 70px;
+    }
+   
+:root{
+    --theme-color: #800;
+}
+.container-fluid{
+/* margin: 10px; */
+}
+.card{
+    height: 450px;
+    width: 320px;
+  margin:10px;
+    background: linear-gradient(
+        to bottom,
+        var(--theme-color) 110px,
+        #ffffff 110px
+    );
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(50,50,50,0.1);
+    padding: 50px 0;
+}
+.card *{
+    font-family: 'Poppins',sans-serif;
+    text-align: center;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+.img{
+    display: block;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 0 8px #ffffff;
+}
+.card h2{
+    color: var(--theme-color);
+    font-size: 26px;
+    margin: 15px 0 5px 0;
+}
+.card p{
+    color: #454545;
+    font-weight: 400;
+    font-size: 14px;
+}
+.details{
+    width: 100%;
+    margin-top: 1px;
+    display: flex;
+    justify-content: space-around;
+}
+.details h2{
+    font-weight: 400;
+}
+.details span{
+    color: var(--theme-color);
+}
+.buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.buttons button{
+    width: 130px;
+    padding: 8px 0;
+    border-radius: 25px;
+    border: 3px solid var(--theme-color);
+}
+.buttons button:first-child{
+    background-color: var(--theme-color);
+    color: #ffffff;
+}
+.buttons button:last-child{
+    background-color: transparent;
+    color: var(--theme-color);
+}
+.themes{
+    background-color: #ffffff;
+    box-shadow: 0 5px 15px rgba(50,50,50,0.1);
+    padding: 20px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+}
+.themes button{
+    height: 25px;
+    width: 25px;
+    border: 3px solid #dddddd;
+    outline: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+a{
+  text-decoration: none;
+  color: #ffffff;
+  background-color: ;
+}
+a:hover{
+  text-decoration: none;
+  color: #ffffff;
+  background-color: ;
+}
+.summary{
+  color: #000;
+}
+.summary:hover{
+  color: #333;
+}
+  </style>
+</head>
+
+<body>
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <div class="container-fluid nav_bg px-0 fixed-top">  
+    <div class="row">
+      <div class="col-md-12 py-1">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <a class="navbar-brand" href="{% url 'home">
+            <img src="images/Tyro.png" alt="" width="30" height="30"
+              class="d-inline-block align-text-top">
+            <!-- <img src="images/q1.png" alt="" width="80" height="30"
+              class="d-inline-block align-text-top"> -->
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto ">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">Home</a>
+              </li>
+              <!-- {% if request.user.is_authenticated %} -->
+              
+            <li class="nav-item">
+              <a href="event_summary.html" class="nav-link">View PID'S</a>
+            </li>
+            <li class="nav-item">
+              <a href="t_event_details.html" class="nav-link">View TID'S</a>
+            </li>
+            <li class="nav-item">
+              <a href="view_event_participant.html" class="nav-link">Events list</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="logout.html">Logout</a>
+            </li>
+            
+
+            </li>
+            <!-- {% endif %} -->
+            </ul>
+      </div>
+      </nav>
+      </div>
+    </div>
+</div>
+<div class="container">
+  
+  <div class="row justify-content-between mt-5">
+    
+    <!-- <div class="col-md-4">
+      <div class="card text-center ">
+        <div class="card-header">
+          <img src="images/1_avatar-512.webp" class="card-img-top" alt="reistration image">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title ">Register Individual</h5>
+          <p class="card-text ">Click on below given button to generate PID</p>
+          <a href="generate_pid.html" class="btn btn-color">Click Here</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          <img src="images/bootwise-icon-02.jpg" class="card-img-top" alt="reistration image">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Register Team</h5>
+          <p class="card-text">Click on below given button to generate TID</p>
+          <a href="generate_tid.html" class="btn btn-color">Click Here</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center">
+        <div class="card-header">
+          <img src="images/reistration.png" class="card-img-top" alt="reistration image">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Register For Event</h5>
+          <p class="card-text">Click on below given button to register for Event</p>
+          <a href="register_event.html" class="btn btn-color">Click Here</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="container">
+        <div class="card">
+            <img class="img" src="images/reistration.png" alt="profile_img">
+            <h2>Register Individual</h2>
+            <p style="font-size:20px;font-weight:200;margin-top:10px">Click on below given button to generate PID</p>
+            <div class="details">
+                <div class="column">
+                  <h2>0</h2>
+                    <span>No. of PID</span>
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="" style="background-color: ;">Click Here</button>
+                <button>View Summary</button>
+            </div>
+        </div>
+      
+    </div>
+    </div> -->
+  </div>
+  <div class="col-md-12 bg-warning py-1  rounded text-center">
+    <h2>View Registration</h2>
+  </div><br>
+  <!-- <small id="pid" class="form-text text-muted">Fill the details Carefully.</small> -->
+  <div class="container-fluid row">
+    <div class="card col">
+        <img class="img" src="images/1_avatar-512.webp" alt="profile_img">
+        <h2>Register Individual</h2>
+        <p style="font-size:20px;font-weight:200;margin-top:10px">Click on below given button to view PID</p>
+        <div class="details">
+            <div class="column">
+              <h1>0</h1>
+                <span>No. of PID</span>
+            </div>
+        </div>
+        <div class="buttons">
+            <!-- <button ><a href="generate_pid.html">Click Here</a></button> -->
+            <button ><a class="summary" href="event_summary.html">View Summary</a></button>
+        </div>
+    </div>
+<div class="card col">
+        <img class="img" src="images/bootwise-icon-02.jpg" alt="profile_img">
+        <h2>Register Team</h2>
+        <p style="font-size:20px;font-weight:200;margin-top:10px">Click on below given button to view TID</p>
+        <div class="details">
+            <div class="column">
+              <h1>0</h1>
+                <span>No. of TID</span>
+            </div>
+        </div>
+        <div class="buttons">
+          <!-- <button ><a href="generate_tid.html">Click Here</a></button> -->
+          <button ><a class="summary" href="t_event_details.html">View Summary</a></button>
+        </div>
+    </div>
+<div class="card">
+        <img class="img" src="images/reistration.png" alt="profile_img">
+        <h2>Register for event</h2>
+        <p style="font-size:20px;font-weight:200;margin-top:10px">Click on below given button to view Events Wise Registration</p>
+        <div class="details">
+            <div class="column">
+              <h1>0</h1>
+                <span>Solo Events Reg.</span>
+            </div>
+            <div class="column">
+              <h1>0</h1>
+                <span>Group Events Reg.</span>
+            </div>
+        </div>
+        <div class="buttons">
+          <!-- <button ><a href="register_event.html">Click Here</a></button> -->
+          <button ><a class="summary" href="view_event_participant.html">View Summary</a></button>
+        </div>
+    </div>
+  
+</div>
+</div>
+<!-- footer -->
+<div class="concontainer-fluid footer-bg-1 mt-5 px-0 d-print-none">
+  <div class="container">
+    <div class="row justify-content-center text-white text-center">
+      <div class="col-md-8 py-4 ">
+        <h4>Shri Ram Murti Smarak College of Engineering and Technology</h4>
+        <p class="mb-0">Powered by: Department of Electrical and Electronics Engineering</p>
+        <p class="mb-0">Developed by</p>
+        <a class="text-white" href="#">Rishabh Srivastava</a>
+        <p class="mb-0"><b>&copy; Zest2K22 Parivartan "Ek Chakra"</b></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

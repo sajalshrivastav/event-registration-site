@@ -1,0 +1,201 @@
+<h1>View Details</h1>  
+<?php
+include  'connection.php';
+session_start();
+// $_SESSION['submit_eid_to_pid'] = $_POST['submit_eid_to_pid'];
+$_SESSION['submit_pid_to_events'] = $_POST['submit_pid_to_events'];
+echo "submit_pid_to_events: ",$_POST['submit_pid_to_events'],"<br>";
+echo "add_event_name ",$_POST['add_event_name'],"<br>";
+$_SESSION['add_event_name'] = $_POST['add_event_name'];
+
+
+$check = $_SESSION['submit_eid_to_pid'];
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $rest1 = mysqli_query($con,"SELECT eid FROM events WHERE event_name  = '".$_SESSION['add_event_name']."'");
+    $rr = mysqli_fetch_array($rest1);
+    $_SESSION['submit_eid_to_pid'] = $rr['eid'];
+    echo "submit_eid_to_pid: ",$_SESSION['submit_eid_to_pid'],"<br>";
+
+
+    //  updating eid to pid
+    $rest2 = mysqli_query($con,"UPDATE events  SET pid = '" . $_SESSION['submit_pid_to_events']  . "'  WHERE eid = '" . $_SESSION['submit_eid_to_pid']  . "' ");
+    //  updating pid to events
+    $rest3 = mysqli_query($con,"UPDATE pid  SET ptid = '" . $_SESSION['submit_eid_to_pid']  . "'  WHERE pid = '" . $_SESSION['submit_pid_to_events']  . "' ");
+
+
+
+
+
+
+    $get_pid_events = $_POST['get_pid_event'];
+    echo "get_pid_events : ",$get_pid_events;
+    // pid events
+    $res123 = mysqli_query($con,"SELECT * FROM pid WHERE pid= '".$get_pid_events."' ");
+    while ($rest = mysqli_fetch_assoc($res123)) {
+        # code...
+        $ptid = $rest['ptid'];
+        echo "<br>",$rest['ptid'],"<br>";
+    }
+
+
+    $res1234 = mysqli_query($con,"SELECT * FROM events WHERE eid= '$ptid' ");
+    $rest12 = mysqli_fetch_assoc($res1234);
+    echo $rest12['event_name'],"<br>";
+    echo $rest12['event_date'],"<br>";
+    echo $rest12['event_start_time'],"<br>";
+    echo $rest12['event_end_time'],"<br>";
+
+
+
+
+    // if ($rest['ptid'] ) {
+    //     # code...
+    // }
+
+
+    // // $rest2 = mysqli_query($con,"INSERT INTO events(pid) VALUES ('" . $_SESSION['submit_pid_to_events']  . "')");
+    // $rest2 = mysqli_query($con,"INSERT into events(pid) select pid  from pid  where id="" ");
+    // $rest3 = mysqli_query($con,"INSERT INTO pid(ptid) VALUES ('" . $_SESSION['submit_eid_to_pid']  . "')");
+    // echo COUNT($rest3);
+
+    // $sqlres12 = mysqli_query($con,"SELECT COUNT(*) FROM events Where eid  = '" . $_SESSION['submit_eid_to_pid']  . "' ");
+    // $rew = mysqli_fetch_assoc($sqlres12);
+    // echo $rew['pid'];
+
+
+    
+
+}
+
+
+?>
+
+<body><br>
+<h1>Enter Details</h1>
+<form method="POST" action="check.php">
+    add_event_name:        <select name="add_event_name">
+        <?php
+                $sql = 'SELECT * FROM events';
+                $res = mysqli_query($con,$sql);
+                ?>
+                <?php  while($row = mysqli_fetch_assoc($res))
+                {?>
+<option name="add_event_name">
+                    <?php   echo $row['event_name']; ?>
+                    <?php
+                    }
+                    ?>
+                </option>
+        </select><br>
+    <!-- submit_eid_to_pid:  -->
+    <!-- <input type="text" name="submit_eid_to_pid"><br> -->
+    submit_pid_to_events:
+    <input type="text" name="submit_pid_to_events"><br><br>
+                    
+
+    <input type="text" name="get_pid_event" placeholder="get_pid_events"><br>
+        <input type="submit">
+    </form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print pid with events final
+
+<?php
+
+include 'connection.php';
+
+
+$view_pid = $_POST['view_pid'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    # code...
+    // get data of updated 
+      
+    $res2 = mysqli_query($con,"SELECT * FROM pid WHERE pid= '" . $view_pid . "' ");
+    $ress2 = mysqli_fetch_assoc($res2);
+    
+    echo "<br>",$ress2['name'];
+    echo " ------------- ",$ress2['roll_no'];
+    echo " ------------- ",$ress2['college'];
+    echo " ------------- ",$ress2['batch'];
+      echo " ------------- ",$ress2['branch'];
+      echo " --------- ",$ress2['course'];
+      echo " ----------- ",$ress2['pid'];
+      echo " ---------- ",$ress2['phone'];
+      echo " -------- ",$ress2['email'];
+      echo "<br><br>------------------------------------------------------------------------------------------------------------------------------------------<br><br>  ";
+      
+      echo "VIEW Details PID : ",$view_pid;
+      $res1 = mysqli_query($con,"SELECT * FROM audience WHERE pid= '" . $view_pid . "' ");
+      while ($ress1 = mysqli_fetch_assoc($res1)) {
+        # code...
+        echo "<br>";
+        echo "---   ",$ress1['reg_event'];
+        echo "---   ",$ress1['venue'];
+
+
+
+
+
+
+      }
+    }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check</title>
+<style>
+    table, th, td {
+  border:1px solid black;
+}
+</style>
+</head>
+
+<body>
+    <h1>Get DATA</h1>
+    <form method="POST">
+        <input name="view_pid">
+        <input type="submit">
+    </form> 
+</body>
+</html>

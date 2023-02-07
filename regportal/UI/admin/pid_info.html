@@ -1,0 +1,229 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html lang="en">
+<style>
+  body {
+    padding-top: 70px;
+  }
+</style>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <title>Parivartan "Ek Chakra"</title>
+  <style>
+    label{
+      color: #333;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <div class="container-fluid nav_bg px-0 fixed-top">  
+    <div class="row">
+      <div class="col-md-12 py-1">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <a class="navbar-brand" href="home">
+            <img src="images/Tyro.png" alt="" width="30" height="30"
+              class="d-inline-block align-text-top">
+            <!-- <img src="images/q1.png" alt="" width="80" height="30"
+              class="d-inline-block align-text-top"> -->
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto ">
+              <li class="nav-item">
+                <a href="home.html" class="nav-link">Home</a>
+              </li>
+              <!-- {% if request.user.is_authenticated %} -->
+              <li class="nav-item">
+                <a href="register_event.html" class="nav-link">Events</a>
+              </li>
+              <li class="nav-item">
+                <a href="event_summary.html" class="nav-link">Summary</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="logout.html">Logout</a>
+              </li>
+              <li class="nav-item">
+                <form action="search_pid" method="POST" class="form-inline" novalidate>
+                  <!-- {% csrf_token %} -->
+                  <input class="form-control mx-sm-2" type="search" placeholder="Enter Roll Number" name="roll_no"
+                    aria-label="Search">
+                  <button class="btn btn-nav my-2 my-sm-0" type="submit">Search PID</button>
+                </form>
+              </li>
+              <!-- {% else %} -->
+              <li class="nav-item">
+                <a class="nav-link " href="signup.html">Signup</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="login.html">Login</a>
+              </li>
+              <!-- {% endif %} -->
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+</div>
+
+<div class="container bg-white rounded p-2" >
+  <div class="row justify-content-center text-center mb-4">
+    <div class="col-md-9 ">
+      <img src="images/q.png" class="rounded mx-auto py-3 d-block" width=35% alt="srmslogo">
+    </div>
+    <div class="text-theme">
+      <h5>SHRI RAM MURTI SMARAK COLLEGE OF ENGINEERNING & TECHNOLOGY,BAREILLY</h5>
+      <h5>Ram Murti Puram, Bareilly - Nainital Rd, Highway, Bhojipura, Uttar Pradesh 243202</h5>
+      <h2><b>Parivartan "Ek Chakra"</b></h2>
+      <h4 class="pt-1">Zest 2022 Registration Details</h4>
+    </div>
+    <p class="text-left" style="font-weight:800;">Date :</p>
+          <p class="text-left" style="font-weight:800;">Time : DD/MM/YYYY</p>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-hover table-bordered bg-white ">
+        <tbody>
+          <tr>
+            <th class="align-middle py-2" width=20% scope="row">PID</th>
+            <td class="align-left py-2" width=30%>{{pid.id}}</td>
+            <th class="align-middle py-2" width=20% scope="row">Name</th>
+            <td class="align-left py-2">{{pid.name}}</td>
+          </tr>
+          <tr>
+            <th class="align-middle py-2" width=20% scope="row">College Name</th>
+            <td class="align-left py-2" width=30%>{{pid.college_name}}</td>
+            <th class="align-middle py-2" width=20% scope="row">Roll Number</th>
+            <td class="align-left py-2">{{pid.roll_no}}</td>
+          </tr>
+          <tr>
+            <th class="align-middle py-2" width=20% scope="row">Batch</th>
+            <td class="align-left py-2" width=30%>{{pid.batch}}</td>
+            <th class="align-middle py-2" width=20% scope="row">Course</th>
+            <td class="align-left py-2">{{pid.course}}</td>
+          </tr>
+          <tr>
+            <th class="align-middle py-2" width=20% scope="row">Branch</th>
+            <td class="align-left py-2" width=30%>{{pid.branch}}</td>
+            <th class="align-middle py-2" width=20% scope="row">Gender</th>
+            <td class="align-left py-2">{{pid.gender}}</td>
+          </tr>
+          <tr>
+            <th class="align-middle py-2" width=20% scope="row">Generated by</th>
+            <td class="align-left py-2" width=30%>{{pid.generated_by}}</td>
+            <th class="align-middle py-2" width=20% scope="row">Registration Date</th>
+            <td class="align-left py-2">{{pid.date_joined}}</td>
+          </tr>
+          <tr>
+            <th class="align-middle py-2" width=20% scope="row">Phone</th>
+            <td class="align-left py-2" width=30%>{{pid.phone}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-12">
+      <table class="table table-bordered table-hover bg-white">
+        <thead>
+          <tr class="text-center">
+            <th scope="col" style="width:50%">Registered Event</th>
+          </tr>
+        </thead>
+      </table>  
+    </div>
+    <!-- {% if pid.pid_event %} -->
+    <div class="col-md-12">  
+      <table class="table table-bordered table-hover bg-white">
+        <thead>
+          <tr>
+            <th scope="col" style="width:45%">Event Name </th>
+            <th scope="col" style="width:30%">Event Venue </th>
+            <th scope="col" style="width:25%">Event Date and Time </th>
+          </tr>
+        </thead>
+        <tbody>
+        <!-- {% for event in pid.pid_event.all%} -->
+          <tr>
+            <td class="align-middle py-2" width=45%>{{event.event_name}}</td>
+            <td class="align-middle py-2" width=30%>{{event.event_venue}}</td>
+            <td class="align-middle py-2" width=25%>{{event.event_time}}</td>
+          </tr>
+        <!-- {% endfor %} -->
+        </tbody>
+      </table>
+    </div>
+    <!-- {% endif %} -->
+  </div>
+</div>
+<div class="container">
+  <div class="row d-print-none">
+    <div class="col-md-12 mt-2  text-center">
+      <form>
+        <input class="btn btn-color serach-btn " type="button" value="Print this page" onClick="window.print()">
+        <a href="register_event.html" class="btn btn-color serach-btn mx-2">Register for Event</a>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- {% else %} -->
+<!-- <div class="container">
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-4">
+      <div class="card text-center ">
+        <div class="card-header">
+          <img src="images/1_avatar-512.webp" class="card-img-top" alt="registration image">
+        </div>
+        <div class="card-body m-3">
+          <h5 class="card-title ">Register Individual</h5>
+          <p class="card-text">Click The given Button to Generate PID</p>
+          <a href="generate_pid" class="btn btn-color">Click Here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- {% endif %} -->
+<div class="concontainer-fluid footer-bg-1 mt-5 px-0 d-print-none">
+  <div class="container">
+    <div class="row justify-content-center text-white text-center">
+      <div class="col-md-8 py-4 ">
+        <h4>Shri Ram Murti Smarak College of Engineering and Technology</h4>
+        <p class = "mb-0">Powered by: Department of Electrical and Electronic Engineering </p>
+        <p class = "mb-0">Developed by</p>
+        <a class="text-white" href="#">Rishabh Srivastava</a>
+        <!-- <a class="text-white" href="https://github.com/nikhil777jais">Nikhil Jaiswal |</a>
+        <a class="text-white" href="https://github.com/Nickhil1737">Nikhil Kumar Gangwar |</a>    
+        <a class="text-white" href="https://github.com/rajat-chn">Rajat Chauhan</a> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="concontainer-fluid footer-bg-2 px-0 d-print-none">
+  <div class="container">
+    <div class="row footer-bg-2">
+      <div class="col-md-6 text-white pt-2">
+        &copy; Zest2K21
+      </div>
+      <div class="col-md-6">
+        <ul class="social float-md-right list-unstyled">
+          <!-- <li><a class="fab fa-facebook" href=""></a></li>
+          <li><a class="fab fa-instagram" href=""></a></li>
+          <li><a class="fab fa-whatsapp" href=""></a></li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

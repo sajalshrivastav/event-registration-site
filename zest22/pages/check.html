@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <button data-popup-open="popupID">Open true popup</button><br><br>
+    <a data-popup-open="popupID" > hi </a>
+    
+      <div class="popup" id="popupID">
+        <div class="popup__inner">
+          <div class="popup__container">
+            <div class="popup__close popup-close" data-popup-close>
+              <div class="svg-icon">&#10006;</div>
+            </div>
+            <div class="popup__content">
+              <!-- your content -->
+              <div class="form">
+                <h2>5 ingredients<br>for a true delicious popup are:</h2>
+                <ul>
+                  <li>the presence of a scroll, if popup has content overflow;</li>
+                  <li>popup should appear smoothly  and disappear fast;</li>
+                  <li>page shouldn’t be scroll, when popup is shown;</li>
+                  <li>popup can hide after click on overlay.</li>
+                  <li>page's content shouldn't tremor when popup appears (if page has vertical scroll)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     </div>
+
+
+     <script>
+        // Use popup
+
+const popup = new Popup();
+popup
+	.on('open', onOpenPopup)
+	.on('close', onClosePopup)
+	.open('cookie', 2000);
+
+// Popup
+
+function Popup(options = {}) {
+	const DEFAULT_OPTIONS = {
+		openClass: 'popup--active',
+		dataClose: 'data-popup-close',
+		dataOpen: 'data-popup-open',
+		dataTarget: 'data-popup',
+	};
+	
+	options = Object.assign(options, DEFAULT_OPTIONS);
+	options = Object.freeze(options);
+	this.options = options;
+	
+	const getEl = name => document.querySelector(`[${options.dataTarget}='${name}']`);
+	const getName = el => el.getAttribute(options.dataTarget);
+	
+	const setHidden = (el, value) => {
+		el.setAttribute('aria-hidden', value ? 'true' : 'false');
+	}
+
+	const events = { 'open': [], 'close': [], };
+	
+	const fireEvent = (type, name, initiatorEvent) => {
+		if(events[type].length === 0) return;
+		events[type].forEach(callback => callback(name, initiatorEvent));
+	}
+	
+	const isActive = el => el.classList.contains(options.openClass);
+	const setActive = (el, value) => el.classList[value ? 'add' : 'remove'](options.openClass);
+		
+	this.open = (name, delay = 0) => {
+		const el = getEl(name);
+		if(!el || isActive(el)) return;
+			
+		setTimeout(() => {
+			if(isActive(el)) return;
+			const eventName = 'open_of_' + name;
+			const initiatorEvent = this[eventName];
+			if(this[eventName]) delete this[eventName];
+			
+			fireEvent('open', name, initiatorEvent);
+			setHidden(el, false);
+			setTimeout(() => el.classList.add(options.openClass), 50);
+		}, delay);
+				
+		return this;
+	}
+		
+	this.close = name => {
+		const el = getEl(name);
+		if(!el || !isActive(el)) return;
+		
+		const endFadeOut = e => {
+			setHidden(el, true);
+			el.removeEventListener('transitionend', endFadeOut);
+		}
+		
+		const eventName = 'close_of_' + name;
+		const initiatorEvent = this[eventName];
+		if(this[eventName]) delete this[eventName];
+		
+		fireEvent('close', name, initiatorEvent);
+		el.addEventListener('transitionend', endFadeOut);
+		el.classList.remove(options.openClass);
+		
+		return this;
+	}
+			
+	this.on = (type, callback) => {
+		if(!events[type] && typeof callback !== 'function') return;
+		events[type].push(callback);
+		return this;
+	}
+	
+	this.off = (type, callback) => {
+		if(!events[type] && typeof callback !== 'function') return;
+		let index = -1;
+		for (let i = 0; i < events[type].length; i++) {
+			if (events[type][i] !== callback) continue;
+			index = i;
+			break;
+		}
+		if(index > -1) events[type].splice(index, 1);
+		return this;
+	}
+	
+	const dataOpen = e => {
+		const initiatorEl = e.target.closest(`[${options.dataOpen}]`);
+		if(!initiatorEl) return;
+		const name = initiatorEl.getAttribute(options.dataOpen);
+		this['open_of_' + name] = e;
+		this.open(name);
+	}
+	
+	const dataClose = e => {
+		const initiatorEl = e.target.closest(`[${options.dataClose}]`);
+		if(!initiatorEl) return;
+		let name = initiatorEl.getAttribute(options.dataClose);
+		if (!name) {
+			const el = e.target.closest(`[${options.dataTarget}]`);
+			name = getName(el);
+		}
+
+		if(!name) return;
+		this['close_of_' + name] = e;
+		this.close(name);
+	};
+
+	document.addEventListener('click', dataOpen);	
+	document.addEventListener('click', dataClose);
+
+	this.destroy = () => {
+		const els = document.querySelectorAll(`[${options.dataTarget}]`)
+		els.forEach(el => {
+			el
+		});
+	}
+	
+	if(!new.target) return this;
+}
+
+// Popup events
+
+let countOpen = 0;
+let countClose = 0;
+
+function onOpenPopup(name, initiatorEvent) {
+	++countOpen;
+	console.log('Popup is opened', countOpen);
+}
+
+function onClosePopup(name, initiatorEvent) {
+	++countClose;
+	console.log('Popup is closed ', countClose)
+	const el = initiatorEvent?.target;
+	if(el && el.hasAttribute('data-accept-cookie'))
+		saveCookie();
+}
+
+function saveCookie() {
+	console.log('🍪 are agreed');
+}
+     </script>
+    
+</body>
+</html>
